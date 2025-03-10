@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!--  // 5 -->
+ 
+<mapper namespace="com.kobi.spring.test.ajax.repository.BookingRepository">
+	<select id="selectBookingList" 
+	resultType="com.kobi.spring.test.ajax.domain.Booking"><!-- id로 매소드 이름, 파라미터 없으니 생략 return타입은 result타입 속성을 통해 명시-->
+		SELECT 
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`booking`
+		ORDER BY 
+			`id` DESC
+	</select> <!--  // 6 -->
+	
+	<insert id="insertBooking" parameterType="map">
+		INSERT INTO 
+			`booking`
+		(
+			 `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+		)
+		VALUE 
+		(
+			#{name}
+			, #{headcount}
+			, #{day}
+			, #{date}
+			, #{phoneNumber}
+			, #{state}
+		)
+	</insert><!--  // 17, result 타입은 고정이니까 int, 예약상태(state) 원활한 기능수행을 통해 하는게 맞다고 판단하에 repository에 추가한다 -->
+	
+	<delete id="deleteBooking" parameterType="int">
+		DELETE FROM 
+			`booking`
+		WHERE
+			`id` = #{id}
+	</delete><!--  // 30 -->
+	
+	<select id="selectBooking" parameterType="map"
+	resultType="com.kobi.spring.test.ajax.domain.Booking">
+		SELECT 
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`booking`
+		WHERE
+			`name` = #{name}
+			AND `phoneNumber` = #{phoneNumber}
+	</select><!--  // 39 -->
+	
+</mapper>

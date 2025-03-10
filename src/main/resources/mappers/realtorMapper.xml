@@ -7,7 +7,7 @@
 	
 	<insert id="insertRealtorByObject" 
 	parameterType="com.kobi.spring.test.mvc.domain.Realtor"
-	useGeneratedKeys="true" keyProperty="id">
+	useGeneratedKeys="true" keyProperty="id"> <!--  // 4-2, 18 -->
 		INSERT INTO 
 			`realtor`
 		(
